@@ -1,22 +1,39 @@
 # Redux Simple Demo
 
-This is a simple demo for the redux code. Only one file is created to explain the working of redux in JavaScript. Please have a look at the comment where I have metioned the working of the functions. 
+This is a simple demonstration of Redux in JavaScript. The entire logic is contained in a single file, with comments explaining how each function works.
 
-## After download/Clone the project
+## Getting Started
 
-Please do following steps 
+Follow these steps to set up and run the project:
 
-- To install the redux package run
+1. **Install dependencies**
 
-    `npm install` 
+    ```bash
+    npm install
+    ```
 
-- To run the project you can run
+2. **Run the project**
 
-    `npm start`
+    ```bash
+    npm start
+    ```
 
-Now you can see the followig result in the command line
+You should see the following output in the command line:
 
-    First State :- { counter: 0 }
-    latestState :- { counter: 1 }
-    latestState :- { counter: 2 }
-    latestState :- { counter: 1 }
+```
+First State :- { counter: 0 }
+latestState :- { counter: 1 }
+latestState :- { counter: 2 }
+latestState :- { counter: 1 }
+```
+
+## Project Structure
+
+- `index.js` – Contains all the Redux logic and demonstration code.
+
+## Notes
+
+- This project is for educational purposes and demonstrates the basics of Redux without any UI.
+- Comments in the code explain the purpose and working of each function.
+
+Feel free to explore and modify the code
