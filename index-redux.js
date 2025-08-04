@@ -1,39 +1,34 @@
-const redux = require("redux");
+const { createStore } = require("redux");
 
-const counterReducer = (state = {counter:0}, action) => {
-    if (action.type === 'INCREMENT') {
-        return {
-            counter:state.counter + 1
-        };
-    } else if (action.type === 'DECREMENT') {
-        return {
-            counter:state.counter - 1
-        };
-    } else {
-        return {
-            counter:state.counter
-        };
+// Reducer function to handle counter actions
+const counterReducer = (state = { counter: 0 }, action) => {
+    switch (action.type) {
+        case 'INCREMENT':
+            return { counter: state.counter + 1 };
+        case 'DECREMENT':
+            return { counter: state.counter - 1 };
+        default:
+            return state;
     }
-    
 };
-const store = redux.createStore(counterReducer);
 
-const firstState = store.getState();
-console.log("First State :-", firstState)
+// Create Redux store with the reducer
+const store = createStore(counterReducer);
 
-const counterSubscriber = () =>{
-    const latestState = store.getState();
-    console.log("latestState :-", latestState)
-}
-// Adds a change listener. It will be called any time an action is dispatched,
-store.subscribe(counterSubscriber);
+// Log the initial state
+console.log("Initial State:", store.getState());
 
-// with this increase one counter current = 1 
-store.dispatch({type:'INCREMENT'});
+// Subscriber function to log state updates
+const counterSubscriber = () => {
+    console.log("Updated State:", store.getState());
+};
 
-// with this increase one counter current = 2
-store.dispatch({type:'INCREMENT'});
+// Subscribe to store updates
+const unsubscribe = store.subscribe(counterSubscriber);
 
+// Dispatch actions to update the counter
+store.dispatch({ type: 'INCREMENT' }); // counter: 1
+store.dispatch({ type: 'INCREMENT' }); // counter: 2
+store.dispatch({ type: 'DECREMENT' }); // counter: 1
 
-// with this increase one counter current = 3
-store.dispatch({type:'DECREMENT'});
+// Optionally unsubscribe if no longer interested
