@@ -1,7 +1,7 @@
 const { createStore } = require("redux");
 
 // Reducer function to handle counter actions
-const counterReducer = (state = { counter: 0 }, action) => {
+function counterReducer(state = { counter: 0 }, action) {
     switch (action.type) {
         case 'INCREMENT':
             return { counter: state.counter + 1 };
@@ -10,7 +10,7 @@ const counterReducer = (state = { counter: 0 }, action) => {
         default:
             return state;
     }
-};
+}
 
 // Create Redux store with the reducer
 const store = createStore(counterReducer);
@@ -18,17 +18,18 @@ const store = createStore(counterReducer);
 // Log the initial state
 console.log("Initial State:", store.getState());
 
-// Subscriber function to log state updates
-const counterSubscriber = () => {
+// Subscribe to store updates and log state changes
+const unsubscribe = store.subscribe(() => {
     console.log("Updated State:", store.getState());
-};
+});
 
-// Subscribe to store updates
-const unsubscribe = store.subscribe(counterSubscriber);
+// Helper functions for dispatching actions
+const increment = () => store.dispatch({ type: 'INCREMENT' });
+const decrement = () => store.dispatch({ type: 'DECREMENT' });
 
 // Dispatch actions to update the counter
-store.dispatch({ type: 'INCREMENT' }); // counter: 1
-store.dispatch({ type: 'INCREMENT' }); // counter: 2
-store.dispatch({ type: 'DECREMENT' }); // counter: 1
+increment(); // counter: 1
+increment(); // counter: 2
+decrement(); // counter: 1
 
-// Optionally unsubscribe if no longer interested
+// Unsubscribe from store updates
